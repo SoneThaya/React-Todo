@@ -1,9 +1,9 @@
 import React from 'react'
 
 class TodoForm extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
+    console.log(props)
     this.state = {
       task: "",
     }
@@ -31,9 +31,10 @@ class TodoForm extends React.Component {
           type="text" name="todo"
           onChange={this.handleChanges}
           value={this.state.task}
+          placeholder="Enter new task"
         />
-        <button>Add Todo</button>
-        
+        <button className="add-btn">Add Todo</button>
+        <button className="clear-btn" >Clear Completed</button>
       </form>
     )
   }

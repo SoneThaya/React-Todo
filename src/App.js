@@ -6,7 +6,7 @@ const todoData = [
   {
     task: 'Organize Garage',
     id: 1528817077286,
-    completed: true
+    completed: false
   },
   {
     task: 'Bake Cookies',
@@ -37,24 +37,42 @@ class App extends React.Component {
     })
   }
 
-  toggleCompleted = (e) => {
-    const element = e.target;
-    element.classList.toggle("completed")
+  toggleCompleted = (key) => {
+    
+   
+
+    this.setState({
+      todoData: this.state.todoData.map(task => {
+        if (key === task.id) {
+          return {
+            ...todoData,
+            completed: !task.completed,
+          };
+        }
+        return todoData
+      })
+    })
   }
 
-  clearCompleted = () => {
-
+  clearCompleted = (e) => {
+    e.prevent.default()
+    this.setState({
+      todoData: this.state.todoData.filter(task => !task.completed)
+    })
   }
 
   render() {
     return (
       <div>
-        <h2>Todo List</h2>
+        <h1>Todo List</h1>
+        <TodoForm addTodo={this.addTodo} />
+
         <TodoList
           todoData={this.state.todoData}
           toggleCompleted={this.toggleCompleted}
+          clearCompleted={this.clearCompleted}
         />
-        <TodoForm addTodo={this.addTodo} />
+        
         
       </div>
     );
