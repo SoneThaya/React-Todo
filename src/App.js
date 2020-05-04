@@ -11,7 +11,7 @@ const todoData = [
   {
     task: 'Bake Cookies',
     id: 1528817084358,
-    completed: true
+    completed: false
   }
 ]
 
@@ -37,11 +37,23 @@ class App extends React.Component {
     })
   }
 
+  toggleCompleted = (e) => {
+    const element = e.target;
+    element.classList.toggle("completed")
+  }
+
+  clearCompleted = () => {
+
+  }
+
   render() {
     return (
       <div>
         <h2>Todo List</h2>
-        <TodoList todoData={this.state.todoData} />
+        <TodoList
+          todoData={this.state.todoData}
+          toggleCompleted={this.toggleCompleted}
+        />
         <TodoForm addTodo={this.addTodo} />
         
       </div>
