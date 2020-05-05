@@ -26,15 +26,17 @@ class App extends React.Component {
     }
   }
 
-  addTodo = (taskName) => {
+  addTodo = async (taskName) => {
     const newTask = {
       task: taskName,
       id: Date.now(),
       completed: false,
     };
-    this.setState({
+    await this.setState({
       todoData: [...this.state.todoData, newTask]
     })
+    localStorage.setItem('todoData', JSON.stringify(this.state.todoData))
+    console.log(localStorage.getItem('todoData'))
   }
 
   toggleCompleted = (clickedId) => {
@@ -81,6 +83,17 @@ class App extends React.Component {
         <button className="clear-btn" onClick={this.clearCompleted} >Clear Completed</button>
       </div>
     );
+  }
+
+  componentDidMount = () => {
+    const todos = localStorage.getItem('todoData')
+
+    if (todos) {
+      const saveTodos = JSON.parse(todos);
+      this.setState({todoData: saveTodos})
+    } else {
+      console.log('no todos')
+    }
   }
 }
 
