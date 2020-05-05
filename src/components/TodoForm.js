@@ -34,7 +34,7 @@ class TodoForm extends React.Component {
           placeholder="Enter new task"
         />
         <button className="add-btn">Add Todo</button>
-        <button className="clear-btn" >Clear Completed</button>
+        
       </form>
     )
   }

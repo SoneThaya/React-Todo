@@ -37,29 +37,34 @@ class App extends React.Component {
     })
   }
 
-  toggleCompleted = (key) => {
-    
-   
-
-    this.setState({
-      todoData: this.state.todoData.map(task => {
-        if (key === task.id) {
-          return {
-            ...todoData,
-            completed: !task.completed,
-          };
+  toggleCompleted = (clickedId) => {
+    const newTodoList = this.state.todoData.map((item) => {
+      if (item.id === clickedId) {
+        return {
+          ...item,
+          completed: !item.completed
         }
-        return todoData
-      })
+      } else {
+        return item;
+      }
+    })
+    this.setState({
+      todoData: newTodoList
+    })
+    
+  }
+
+  clearCompleted = () => {
+    const uncompletedTodos = this.state.todoData.filter(todo => todo.completed === false)
+    
+    
+    this.setState({
+      ...this.state,
+      todoData: uncompletedTodos
     })
   }
 
-  clearCompleted = (e) => {
-    e.prevent.default()
-    this.setState({
-      todoData: this.state.todoData.filter(task => !task.completed)
-    })
-  }
+ 
 
   render() {
     return (
@@ -70,10 +75,10 @@ class App extends React.Component {
         <TodoList
           todoData={this.state.todoData}
           toggleCompleted={this.toggleCompleted}
-          clearCompleted={this.clearCompleted}
+          deleteTodo={this.deleteTodo}
         />
         
-        
+        <button className="clear-btn" onClick={this.clearCompleted} >Clear Completed</button>
       </div>
     );
   }

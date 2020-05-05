@@ -13,8 +13,9 @@ const TodoList = props => {
             key={item.id}
             todoData={item.task}
             toggleCompleted={props.toggleCompleted}
-            clearCompleted={props.clearCompleted}
             completed={item.completed}
+            deleteTodo={props.deleteTodo}
+            item={item}
           />
         ))
       }
